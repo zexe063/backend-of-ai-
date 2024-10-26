@@ -51,19 +51,24 @@ server.get("/",(req,res)=>{
 
 server.post("/chat",async(req,res)=>{
   
-  console.log(req.body)
-  const prompt = `
-  you are Eclisipe a coding agent for full stack web development (react js next js and all web dev tools)
-  you canot do any mistake
-  you are a good coder
-  you can only genetate code for web dev not otehrs
- ${req.body.prompt}`;
-
- 
-  console.log(prompt)
-  const result = await model.generateContent(prompt)
-  const obj = JSON.parse(result.response.text())
-  res.json(obj)
+  try{
+    console.log(req.body)
+    const prompt = `
+    you are Eclisipe a coding agent for full stack web development (react js next js and all web dev tools)
+    you canot do any mistake
+    you are a good coder
+    you can only genetate code for web dev not otehrs
+   ${req.body.prompt}`;
+  
+   
+    console.log(prompt)
+    const result = await model.generateContent(prompt)
+    const obj = JSON.parse(result.response.text())
+    res.json(obj)
+  } catch(error){
+    console.log(error)
+    res.status(500).json({error:"something went wrong"})
+  }
 })
 
 
