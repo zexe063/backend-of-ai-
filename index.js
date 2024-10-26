@@ -66,8 +66,8 @@ server.post("/chat",async(req,res)=>{
     const obj = JSON.parse(result.response.text())
     res.json(obj)
   } catch(error){
-    console.log(error)
-    res.status(500).json({error:"something went wrong"})
+    // console.log(error)
+    res.json({error:"something went wrong"})
   }
 })
 
